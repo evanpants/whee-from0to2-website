@@ -1,0 +1,21 @@
+{
+  "name": "from0to2-website",
+  "version": "1.0.0",
+  "description": "Simple webpage for from0to2.com hosted on GitHub Pages with Cloudflare",
+  "main": "index.html",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy ."
+  },
+  "keywords": [
+    "website",
+    "github-pages",
+    "cloudflare"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
+

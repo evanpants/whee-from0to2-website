@@ -1,0 +1,17 @@
+# Cloudflare Workers configuration
+# This file configures your Cloudflare Workers deployment
+
+name = "from0to2"
+compatibility_date = "2024-01-01"
+
+# Pages configuration (for static site hosting)
+pages_build_output_dir = "."
+
+# If you want to use Workers instead of Pages, uncomment below:
+# [site]
+# bucket = "./"
+
+# Environment variables (if needed)
+# [vars]
+# MY_VARIABLE = "value"
+
