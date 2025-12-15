@@ -168,8 +168,10 @@ body {
     font-size: 3.5rem;
     font-weight: 800;
     color: var(--text-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
     line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
 }
 
 .hero-subtitle {
@@ -251,10 +253,83 @@ body {
     font-weight: 500;
 }
 
+/* Features Section */
+.features {
+    padding: 80px 20px;
+    background: var(--bg-color);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+}
+
+.feature-item h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.feature-item p {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Enjoy Section */
+.enjoy-section {
+    padding: 80px 20px;
+    background: var(--bg-light);
+}
+
+.enjoy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.commute-section {
+    padding: 80px 20px;
+    background: var(--bg-color);
+}
+
+.commute-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.enjoy-content p,
+.commute-content p {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.enjoy-content .cta-button,
+.commute-content .cta-button {
+    margin-top: 2rem;
+}
+
 /* Bike Showcase Section */
 .bike-showcase {
     padding: 80px 20px;
     background: var(--bg-light);
+}
+
+.bike-showcase .section-subtitle {
+    margin-bottom: 3rem;
 }
 
 /* Lifestyle Section */
@@ -405,57 +480,14 @@ body {
     color: var(--text-light);
 }
 
-/* Benefits Section */
-.benefits {
-    padding: 80px 20px;
-    background: var(--bg-color);
-}
-
+/* Section Title */
 .section-title {
     font-size: 2.5rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     color: var(--text-color);
-}
-
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.benefit-card {
-    background: var(--bg-light);
-    padding: 2.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary-color);
-    background: white;
-}
-
-.benefit-icon {
-    font-size: 4.8rem; /* Increased by 60% from 3rem */
-    margin-bottom: 1rem;
-}
-
-.benefit-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-}
-
-.benefit-card p {
-    color: var(--text-light);
-    line-height: 1.6;
+    line-height: 1.2;
 }
 
 /* Pricing Section */
@@ -702,8 +734,9 @@ body {
         font-size: 2rem;
     }
     
-    .benefits-grid {
+    .features-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
     
     .steps {
@@ -736,11 +769,4 @@ body {
         font-size: 2.5rem;
     }
     
-    .benefit-card {
-        padding: 1.25rem 1.5rem; /* Reduced padding for smaller height */
-    }
-    
-    .benefit-icon {
-        margin-bottom: 0.5rem; /* Reduced margin to decrease card height */
-    }
 }
