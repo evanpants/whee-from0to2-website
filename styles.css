@@ -10,7 +10,7 @@
     /* Exact color palette - no gradients */
     --light-blue-grey: #9FAFC6;
     --medium-purple-blue: #5F67A5;
-    --pale-yellow: #F7ED9F;
+    --pale-yellow: #b0bbcd;
     --gold: #E8BC34;
     --olive-green: #647539;
     --yellow: #F3C12F;
@@ -27,7 +27,7 @@
     --secondary-light: #7a8a4a;
     --accent-gold: #E8BC34;
     --accent-yellow: #F3C12F;
-    --accent-pale-yellow: #F7ED9F;
+    --accent-pale-yellow: #b0bbcd;
     --accent-red-orange: #E63C25;
     --accent-sage: #A4B29C;
     --accent-blue-grey: #9FAFC6;
@@ -37,7 +37,7 @@
     --text-lighter: #9ca3af;
     --bg-color: #ffffff;
     --bg-light: #f9fafb;
-    --bg-pale-yellow: #F7ED9F;
+    --bg-pale-yellow: #b0bbcd;
     --bg-dark: #2c3e2d;
     --border-color: #e5e7eb;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -140,6 +140,15 @@ body {
 
 .cta-button.full-width {
     width: 100%;
+}
+
+.cta-button {
+    text-decoration: none;
+    text-align: center;
+}
+
+a.cta-button {
+    display: inline-block;
 }
 
 /* Hero Section */
@@ -412,6 +421,9 @@ body {
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    color: inherit;
 }
 
 .bike-card:hover {
@@ -480,6 +492,19 @@ body {
     color: var(--text-light);
 }
 
+.bike-card > div {
+    padding: 1.5rem 1.5rem 0.5rem;
+}
+
+.bike-card > div h3 {
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.bike-card > div p {
+    padding: 0 0 1.5rem 0;
+}
+
 /* Section Title */
 .section-title {
     font-size: 2.5rem;
@@ -488,6 +513,93 @@ body {
     margin-bottom: 1.5rem;
     color: var(--text-color);
     line-height: 1.2;
+}
+
+/* Badge and Banner Styles */
+.available-badge {
+    display: inline-block;
+    background: #10b981;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.out-of-stock-banner {
+    background: var(--accent-red-orange);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.125rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Form Styles */
+.bike-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(95, 103, 165, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.form-message.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+    display: block;
+}
+
+.form-message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #ef4444;
+    display: block;
 }
 
 /* Pricing Section */

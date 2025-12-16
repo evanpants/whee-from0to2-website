@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TERN GSD e-bike available for subscription in NYC. Premium e-bike perfect for families and heavy loads.">
+    <title>TERN GSD | from0to2 - E-bike Subscription NYC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="from0to2 Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="logo-text" style="display: none;">from0to2</span>
+                </a>
+            </div>
+            <a href="get-started.html" class="cta-button nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Bike Detail Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-image">
+                <img src="images/tern-gsd.jpg" alt="TERN GSD E-bike" class="hero-bike-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="image-placeholder bike-hero" style="display: none;">
+                    <div class="placeholder-content">
+                        <p>TERN GSD Image</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <span class="available-badge">Available</span>
+                <h1 class="hero-title">TERN GSD</h1>
+                <p class="hero-subtitle">Perfect for families and heavy loads. Premium e-bike designed for safety, comfort, and serious carrying power.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bike Details -->
+    <section class="bike-showcase">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 class="section-title">About the TERN GSD</h2>
+                <p class="section-subtitle">The TERN GSD is our flagship e-bike, designed for families and those who need to carry heavy loads. With its longtail design and powerful electric motor, it's perfect for school runs, grocery shopping, and daily commuting.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry Form -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Interested in the TERN GSD?</h2>
+            <p class="section-subtitle">Fill out the form below and we'll get in touch with you to start your subscription.</p>
+            <form id="gsd-form" class="bike-form">
+                <div id="form-message" class="form-message"></div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message (Optional)</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your needs or ask any questions..."></textarea>
+                </div>
+                <input type="hidden" id="bike-model" name="bike_model" value="TERN GSD">
+                <input type="hidden" id="status" name="status" value="Available">
+                <input type="hidden" id="timestamp" name="timestamp">
+                <input type="hidden" id="referrer" name="referrer">
+                <input type="hidden" id="user-agent" name="user_agent">
+                <button type="submit" class="cta-button primary full-width">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>from0to2</h4>
+                    <p>E-bike subscription made simple for NYC</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@from0to2.com</p>
+                    <p>Serving New York City</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <p><a href="#">Terms of Service</a></p>
+                    <p><a href="#">Privacy Policy</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 from0to2.com. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set hidden form fields
+        document.getElementById('timestamp').value = new Date().toISOString();
+        document.getElementById('referrer').value = document.referrer || 'Direct';
+        document.getElementById('user-agent').value = navigator.userAgent;
+
+        // Form submission
+        document.getElementById('gsd-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const messageDiv = document.getElementById('form-message');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            messageDiv.className = 'form-message';
+            messageDiv.style.display = 'none';
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Replace with your Google Apps Script URL after setup
+            const scriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+            
+            // Create a hidden iframe for form submission (works around CORS)
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden-iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // Create a temporary form to submit via iframe
+            const tempForm = document.createElement('form');
+            tempForm.method = 'POST';
+            tempForm.action = scriptUrl;
+            tempForm.target = 'hidden-iframe';
+            tempForm.style.display = 'none';
+            
+            // Add all form data as hidden inputs
+            Object.keys(data).forEach(key => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = data[key];
+                tempForm.appendChild(input);
+            });
+            
+            document.body.appendChild(tempForm);
+            tempForm.submit();
+            
+            // Show success message (we assume success since we can't read response with iframe method)
+            setTimeout(() => {
+                messageDiv.className = 'form-message success';
+                messageDiv.textContent = 'Thank you! Your inquiry has been received. We\'ll contact you soon.';
+                messageDiv.style.display = 'block';
+                form.reset();
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Clean up
+                document.body.removeChild(tempForm);
+                document.body.removeChild(iframe);
+                
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Inquiry';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+

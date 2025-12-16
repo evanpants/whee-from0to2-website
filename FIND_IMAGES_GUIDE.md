@@ -111,3 +111,6 @@ If you want to test the layout first, you can use placeholder images:
 
 But for production, use real images from Unsplash/Pexels.
 
+
+
+

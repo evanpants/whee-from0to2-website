@@ -1,0 +1,7 @@
+# Google Sheets Configuration
+GOOGLE_SHEET_ID=your_google_sheet_id_here
+
+# Optional: Path to Google credentials file (defaults to credentials.json)
+GOOGLE_CREDENTIALS_FILE=credentials.json
+
+

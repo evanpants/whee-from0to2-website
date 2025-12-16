@@ -62,3 +62,6 @@ If you have the family cargo bike image you showed earlier:
 - Or save it as `family-commute.jpg` for the lifestyle section
 - You can use the same image for both if needed (just copy it twice with different names)
 
+
+
+
