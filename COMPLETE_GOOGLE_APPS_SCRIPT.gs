@@ -1,37 +1,39 @@
 /**
- * Google Apps Script to handle form submissions from from0to2.com
+ * Complete Google Apps Script for from0to2.com Form Submissions
  * 
- * This script receives form data and writes it to a Google Sheet,
- * then sends an email notification to ride@from0to2.com
- * 
- * SETUP INSTRUCTIONS:
+ * INSTRUCTIONS:
  * 1. Open your Google Sheet: https://docs.google.com/spreadsheets/d/1rlA9JrJyElCr9NEs31Qsa9QA-4GeSQVX5CQJhbDggoc/edit#gid=2065220436
  * 2. Go to Extensions > Apps Script
- * 3. Delete any existing code and paste this entire file
- * 4. Replace 'YOUR_SHEET_NAME' with the actual name of the tab (gid=2065220436)
- * 5. Click "Deploy" > "New deployment"
- * 6. Select type: "Web app"
- * 7. Execute as: "Me"
- * 8. Who has access: "Anyone"
- * 9. Click "Deploy" and copy the Web App URL
- * 10. Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE' in all HTML files with this URL
+ * 3. DELETE ALL EXISTING CODE
+ * 4. Copy and paste this ENTIRE file
+ * 5. Replace 'website_inquiries' below with your actual sheet tab name (or leave it if that's correct)
+ * 6. Click "Deploy" > "New deployment"
+ * 7. Select type: "Web app"
+ * 8. Execute as: "Me"
+ * 9. Who has access: "Anyone"
+ * 10. Click "Deploy" and copy the Web App URL
+ * 11. Make sure the URL in your HTML files matches this new URL
  */
 
-// Configuration - UPDATE THESE VALUES
-const SHEET_NAME = 'YOUR_SHEET_NAME'; // Replace with your actual sheet tab name
+// Configuration
+const SPREADSHEET_ID = '1rlA9JrJyElCr9NEs31Qsa9QA-4GeSQVX5CQJhbDggoc';
+const SHEET_NAME = 'website_inquiries'; // Change this to your actual sheet tab name
 const EMAIL_TO = 'ride@from0to2.com';
 
+/**
+ * Main function to handle form submissions
+ */
 function doPost(e) {
   try {
-    // Handle both JSON and form-encoded data
-    let data;
+    // Parse the incoming data
+    let data = {};
+    
     if (e.postData && e.postData.contents) {
       try {
-        // Try to parse as JSON first
+        // Try to parse as JSON
         data = JSON.parse(e.postData.contents);
       } catch (jsonError) {
         // If not JSON, parse as form data
-        data = {};
         const params = e.parameter;
         for (const key in params) {
           data[key] = params[key];
@@ -42,13 +44,13 @@ function doPost(e) {
       data = e.parameter || {};
     }
     
-    // Get the active spreadsheet
-    const ss = SpreadsheetApp.openById('1rlA9JrJyElCr9NEs31Qsa9QA-4GeSQVX5CQJhbDggoc');
+    // Get the spreadsheet
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     
-    // Get the specific sheet by GID (2065220436) or by name
-    let sheet;
-    try {
-      // Try to get sheet by GID first
+    // Get the sheet by name or create it if it doesn't exist
+    let sheet = ss.getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      // Try to find sheet by GID (2065220436)
       const sheets = ss.getSheets();
       for (let i = 0; i < sheets.length; i++) {
         if (sheets[i].getSheetId() == 2065220436) {
@@ -56,21 +58,15 @@ function doPost(e) {
           break;
         }
       }
-      // If not found, try by name
-      if (!sheet) {
-        sheet = ss.getSheetByName(SHEET_NAME);
-      }
       // If still not found, use first sheet
       if (!sheet) {
         sheet = ss.getSheets()[0];
       }
-    } catch (error) {
-      sheet = ss.getSheets()[0];
     }
     
-    // Get headers if sheet is empty, otherwise use existing headers
-    let headers = [];
+    // Set up headers if sheet is empty
     const lastRow = sheet.getLastRow();
+    let headers = [];
     
     if (lastRow === 0) {
       // Sheet is empty, create headers
@@ -93,18 +89,19 @@ function doPost(e) {
       headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
     }
     
-    // Get IP address from the request
-    const ipAddress = e.parameter.ipAddress || getClientIP(e);
-    
     // Get current date and time
     const now = new Date();
     const dateStr = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyy-MM-dd');
     const timeStr = Utilities.formatDate(now, Session.getScriptTimeZone(), 'HH:mm:ss');
     
+    // Get IP address (if available)
+    const ipAddress = data.ipAddress || data.ip_address || 'Unknown';
+    
     // Prepare row data matching headers
     const rowData = [];
     headers.forEach(function(header) {
-      switch(header.toLowerCase()) {
+      const headerLower = header.toLowerCase().trim();
+      switch(headerLower) {
         case 'timestamp':
           rowData.push(data.timestamp || now.toISOString());
           break;
@@ -119,7 +116,7 @@ function doPost(e) {
           break;
         case 'bike model':
         case 'bike_model':
-          rowData.push(data.bike_model || '');
+          rowData.push(data.bike_model || data['bike_model'] || '');
           break;
         case 'status':
           rowData.push(data.status || '');
@@ -129,7 +126,7 @@ function doPost(e) {
           break;
         case 'user agent':
         case 'user_agent':
-          rowData.push(data.user_agent || '');
+          rowData.push(data.user_agent || data['user_agent'] || '');
           break;
         case 'ip address':
         case 'ip_address':
@@ -146,31 +143,26 @@ function doPost(e) {
       }
     });
     
-    // Append the row
+    // Append the row to the sheet
     sheet.appendRow(rowData);
     
     // Send email notification
     try {
-      const subject = `New ${data.bike_model || 'E-bike'} Inquiry - ${data.status || 'Inquiry'}`;
-      const body = `
-New inquiry received from from0to2.com:
-
-Bike Model: ${data.bike_model || 'N/A'}
-Status: ${data.status || 'N/A'}
-Email: ${data.email || 'N/A'}
-Name: ${data.name || 'Not provided'}
-Message: ${data.message || 'None'}
-
-Additional Information:
-- Referrer: ${data.referrer || 'Direct'}
-- User Agent: ${data.user_agent || 'N/A'}
-- IP Address: ${ipAddress}
-- Timestamp: ${data.timestamp || now.toISOString()}
-- Date: ${dateStr}
-- Time: ${timeStr}
-
-This information has been automatically saved to the Google Sheet.
-      `;
+      const subject = 'New ' + (data.bike_model || 'E-bike') + ' Inquiry - ' + (data.status || 'Inquiry');
+      const body = 'New inquiry received from from0to2.com:\n\n' +
+        'Bike Model: ' + (data.bike_model || 'N/A') + '\n' +
+        'Status: ' + (data.status || 'N/A') + '\n' +
+        'Email: ' + (data.email || 'N/A') + '\n' +
+        'Name: ' + (data.name || 'Not provided') + '\n' +
+        'Message: ' + (data.message || 'None') + '\n\n' +
+        'Additional Information:\n' +
+        '- Referrer: ' + (data.referrer || 'Direct') + '\n' +
+        '- User Agent: ' + (data.user_agent || 'N/A') + '\n' +
+        '- IP Address: ' + ipAddress + '\n' +
+        '- Timestamp: ' + (data.timestamp || now.toISOString()) + '\n' +
+        '- Date: ' + dateStr + '\n' +
+        '- Time: ' + timeStr + '\n\n' +
+        'This information has been automatically saved to the Google Sheet.';
       
       MailApp.sendEmail({
         to: EMAIL_TO,
@@ -179,7 +171,8 @@ This information has been automatically saved to the Google Sheet.
       });
     } catch (emailError) {
       // Log error but don't fail the request
-      console.error('Email send error:', emailError);
+      Logger.log('Email send error: ' + emailError.toString());
+      // Still return success since data was saved
     }
     
     // Return success response
@@ -191,6 +184,10 @@ This information has been automatically saved to the Google Sheet.
       .setMimeType(ContentService.MimeType.JSON);
       
   } catch (error) {
+    // Log the error
+    Logger.log('Error in doPost: ' + error.toString());
+    Logger.log('Stack trace: ' + error.stack);
+    
     // Return error response
     return ContentService
       .createTextOutput(JSON.stringify({
@@ -201,37 +198,36 @@ This information has been automatically saved to the Google Sheet.
   }
 }
 
-// Helper function to get client IP address
-function getClientIP(e) {
-  // Try to get IP from various headers
-  const ip = e.parameter.ipAddress || 
-             e.parameter['X-Forwarded-For'] || 
-             e.parameter['X-Real-IP'] ||
-             '';
-  return ip.split(',')[0].trim() || 'Unknown';
+/**
+ * Test function to verify email sending works
+ * Run this function to trigger authorization if needed
+ */
+function testEmail() {
+  try {
+    MailApp.sendEmail({
+      to: EMAIL_TO,
+      subject: 'Test Email from Google Apps Script',
+      body: 'This is a test email. If you receive this, email sending is working correctly!'
+    });
+    Logger.log('Test email sent successfully!');
+  } catch (error) {
+    Logger.log('Error sending test email: ' + error.toString());
+  }
 }
 
-// Test function (optional - for testing in Apps Script editor)
-function testDoPost() {
-  const mockEvent = {
-    postData: {
-      contents: JSON.stringify({
-        email: 'test@example.com',
-        name: 'Test User',
-        message: 'Test message',
-        bike_model: 'TERN GSD',
-        status: 'Available',
-        referrer: 'https://from0to2.com',
-        user_agent: 'Mozilla/5.0 Test',
-        timestamp: new Date().toISOString()
-      })
-    },
-    parameter: {
-      ipAddress: '127.0.0.1'
-    }
-  };
-  
-  const result = doPost(mockEvent);
-  Logger.log(result.getContent());
+/**
+ * Test function to verify sheet access works
+ */
+function testSheetAccess() {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(SHEET_NAME) || ss.getSheets()[0];
+    Logger.log('Sheet accessed successfully: ' + sheet.getName());
+    Logger.log('Last row: ' + sheet.getLastRow());
+    return true;
+  } catch (error) {
+    Logger.log('Error accessing sheet: ' + error.toString());
+    return false;
+  }
 }
 

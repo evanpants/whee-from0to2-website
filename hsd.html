@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TERN Quick Haul e-bike - Currently out of stock. Get notified when available for subscription in NYC.">
-    <title>TERN Quick Haul | from0to2 - E-bike Subscription NYC</title>
+    <meta name="description" content="HSD e-bike - Currently out of stock. Get notified when available for subscription in NYC.">
+    <title>HSD | Cargo Bike Leasing NYC | from0to2.com</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
     <!-- Navigation -->
@@ -25,17 +26,17 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-image">
-                <img src="images/tern-quick-haul.webp" alt="TERN Quick Haul E-bike" class="hero-bike-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <img src="images/hsd.jpg" alt="HSD E-bike" class="hero-bike-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <div class="out-of-stock-banner">Out of Stock</div>
                 <div class="image-placeholder bike-hero" style="display: none;">
                     <div class="placeholder-content">
-                        <p>TERN Quick Haul Image</p>
+                        <p>HSD Image</p>
                     </div>
                 </div>
             </div>
             <div class="hero-content">
-                <h1 class="hero-title">TERN Quick Haul</h1>
-                <p class="hero-subtitle">Lightweight and agile for city commuting. The perfect e-bike for quick trips and urban adventures.</p>
+                <h1 class="hero-title">HSD</h1>
+                <p class="hero-subtitle">Compact yet powerful urban e-bike. Perfect for commuters who need a versatile, apartment-friendly e-bike.</p>
             </div>
         </div>
     </section>
@@ -44,8 +45,8 @@
     <section class="bike-showcase">
         <div class="container">
             <div style="max-width: 800px; margin: 0 auto;">
-                <h2 class="section-title">About the TERN Quick Haul</h2>
-                <p class="section-subtitle">The TERN Quick Haul is our most compact and agile e-bike. Perfect for quick errands, daily commutes, and riders who want a lightweight e-bike that's easy to maneuver through city streets.</p>
+                <h2 class="section-title">About the HSD</h2>
+                <p class="section-subtitle">The HSD is a compact e-bike that doesn't compromise on power. With its vertical parking capability and apartment-friendly design, it's perfect for urban commuters who want a premium e-bike that fits their lifestyle.</p>
             </div>
         </div>
     </section>
@@ -54,9 +55,9 @@
     <section class="pricing">
         <div class="container">
             <h2 class="section-title">Be Informed When Back in Stock</h2>
-            <p class="section-subtitle">The TERN Quick Haul is currently out of stock. Enter your email below and we'll notify you as soon as it becomes available.</p>
+            <p class="section-subtitle">The HSD is currently out of stock. Enter your email below and we'll notify you as soon as it becomes available.</p>
             <div id="form-message" class="form-message"></div>
-            <form id="quick-haul-form" class="bike-form">
+            <form id="hsd-form" class="bike-form">
                 <div class="form-group">
                     <label for="email">Email Address *</label>
                     <input type="email" id="email" name="email" required>
@@ -69,7 +70,7 @@
                     <label for="message">Message (Optional)</label>
                     <textarea id="message" name="message" placeholder="Any questions or specific requirements?"></textarea>
                 </div>
-                <input type="hidden" id="bike-model" name="bike_model" value="TERN Quick Haul">
+                <input type="hidden" id="bike-model" name="bike_model" value="HSD">
                 <input type="hidden" id="status" name="status" value="Out of Stock">
                 <input type="hidden" id="timestamp" name="timestamp">
                 <input type="hidden" id="referrer" name="referrer">
@@ -111,7 +112,7 @@
         document.getElementById('user-agent').value = navigator.userAgent;
 
         // Form submission
-        document.getElementById('quick-haul-form').addEventListener('submit', async function(e) {
+        document.getElementById('hsd-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const form = e.target;
@@ -160,7 +161,7 @@
             setTimeout(() => {
                 // Show success message first
                 messageDiv.className = 'form-message success';
-                messageDiv.textContent = 'Thank you! We\'ll notify you as soon as the TERN Quick Haul is back in stock.';
+                messageDiv.textContent = 'Thank you! We\'ll notify you as soon as the HSD is back in stock.';
                 messageDiv.style.display = 'block';
                 
                 // Hide the form (message is outside form, so it stays visible)
@@ -177,7 +178,7 @@
 
         // Reset form when page loads (if user navigated away and came back)
         window.addEventListener('load', function() {
-            const form = document.getElementById('quick-haul-form');
+            const form = document.getElementById('hsd-form');
             const messageDiv = document.getElementById('form-message');
             // Reset form state on page load
             form.style.display = 'block';

@@ -13,18 +13,69 @@ The most likely issue is that your Google Apps Script needs to be authorized to 
 3. You should see your script code
 
 ### Step 2: Authorize the Script
-1. Click the **Run** button (▶️) in the toolbar
-2. Select the `doPost` function (or any function)
-3. Google will ask for authorization - click **Review Permissions**
-4. Choose your Google account
-5. Click **Advanced** → **Go to [Your Project Name] (unsafe)**
-6. Click **Allow** to grant permissions
-7. This authorizes the script to:
+
+**If the authorization prompt doesn't appear automatically, try these methods:**
+
+#### Method 1: Run a Test Function
+1. In the Apps Script editor, add this test function at the end of your code:
+   ```javascript
+   function testAuthorization() {
+     try {
+       MailApp.sendEmail({
+         to: 'ride@from0to2.com',
+         subject: 'Authorization Test',
+         body: 'Testing email permissions'
+       });
+       Logger.log('Email sent successfully');
+     } catch (error) {
+       Logger.log('Error: ' + error.toString());
+     }
+   }
+   ```
+2. Select `testAuthorization` from the function dropdown (top of editor)
+3. Click the **Run** button (▶️)
+4. **This should trigger the authorization prompt**
+
+#### Method 2: Check Existing Authorizations
+1. In Apps Script, click the **🔒 Lock icon** (or "View" → "Show execution transcript")
+2. Look for any authorization errors
+3. If you see "Authorization required", click it to start the authorization flow
+
+#### Method 3: Manual Authorization
+1. In Apps Script, go to **Overview** (left sidebar, icon looks like `</>`)
+2. Click **Project Settings** (gear icon)
+3. Scroll down to **Google Cloud Platform (GCP) Project**
+4. Click **Change project**
+5. This may trigger re-authorization
+
+#### Method 4: Deploy as Web App (Triggers Authorization)
+1. Click **Deploy** → **New deployment**
+2. Click the gear icon ⚙️ next to "Select type"
+3. Choose **Web app**
+4. Set:
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+5. Click **Deploy**
+6. This process will trigger authorization prompts
+
+#### Method 5: Check Your Google Account Permissions
+1. Go to: https://myaccount.google.com/permissions
+2. Look for "Apps with access to your account"
+3. Find your Google Apps Script project
+4. If it's there but emails still don't work, remove it and re-authorize
+
+**Once authorization appears:**
+1. Click **Review Permissions**
+2. Choose your Google account
+3. You may see a warning - click **Advanced** → **Go to [Your Project Name] (unsafe)**
+4. Click **Allow** to grant permissions
+5. This authorizes the script to:
    - Access your Google Sheets
    - Send emails on your behalf
 
 ### Step 3: Test Email Sending
-1. In the Apps Script editor, create a test function:
+1. Use the `testAuthorization` function you created in Step 2 (Method 1)
+2. Or create a new test function:
    ```javascript
    function testEmail() {
      MailApp.sendEmail({
@@ -32,10 +83,19 @@ The most likely issue is that your Google Apps Script needs to be authorized to 
        subject: 'Test Email',
        body: 'This is a test email from Google Apps Script.'
      });
+     Logger.log('Test email sent!');
    }
    ```
-2. Run this function
-3. Check if you receive the email
+3. Select the function from the dropdown
+4. Click **Run** (▶️)
+5. Check the **Execution log** (View → Logs, or press Ctrl+Enter / Cmd+Enter)
+6. Look for "Email sent successfully" or any error messages
+7. Check your inbox at `ride@from0to2.com` for the test email
+
+**If you see errors in the log:**
+- "Authorization required" → Follow Step 2 methods above
+- "Invalid email" → Check the email address is correct
+- "Service invoked too many times" → Wait a few minutes and try again
 
 ### Step 4: Check Execution Logs
 1. In Apps Script, go to **Executions** (clock icon in left sidebar)
