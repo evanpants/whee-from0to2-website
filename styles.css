@@ -432,6 +432,12 @@ a.cta-button {
     box-shadow: var(--shadow-lg);
 }
 
+.bike-image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
 .bike-image {
     width: 100%;
     height: 250px;
@@ -531,6 +537,7 @@ a.cta-button {
     transform: translateX(-50%);
     z-index: 10;
     box-shadow: var(--shadow-lg);
+    white-space: nowrap;
 }
 
 .available-badge {
