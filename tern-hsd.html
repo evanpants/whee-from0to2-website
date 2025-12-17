@@ -55,8 +55,8 @@
         <div class="container">
             <h2 class="section-title">Be Informed When Back in Stock</h2>
             <p class="section-subtitle">The TERN HSD is currently out of stock. Enter your email below and we'll notify you as soon as it becomes available.</p>
+            <div id="form-message" class="form-message"></div>
             <form id="hsd-form" class="bike-form">
-                <div id="form-message" class="form-message"></div>
                 <div class="form-group">
                     <label for="email">Email Address *</label>
                     <input type="email" id="email" name="email" required>
@@ -158,14 +158,16 @@
             
             // Show success message
             setTimeout(() => {
+                // Show success message first
                 messageDiv.className = 'form-message success';
                 messageDiv.textContent = 'Thank you! We\'ll notify you as soon as the TERN HSD is back in stock.';
                 messageDiv.style.display = 'block';
                 
-                // Hide the form
+                // Hide the form (message is outside form, so it stays visible)
                 form.style.display = 'none';
                 
-                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                // Scroll to message
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
                 // Clean up
                 document.body.removeChild(tempForm);
