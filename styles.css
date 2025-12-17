@@ -222,6 +222,7 @@ a.cta-button {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .image-placeholder {
@@ -516,83 +517,96 @@ a.cta-button {
 }
 
 /* Badge and Banner Styles */
-.available-badge {
+.available-badge,
+.out-of-stock-banner {
     display: inline-block;
-    background: #10b981;
     color: white;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
     font-weight: 600;
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    box-shadow: var(--shadow-lg);
+}
+
+.available-badge {
+    background: #10b981;
 }
 
 .out-of-stock-banner {
     background: var(--accent-red-orange);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1.125rem;
-    text-align: center;
-    margin-bottom: 2rem;
 }
 
 /* Form Styles */
 .bike-form {
-    max-width: 500px;
+    max-width: 550px;
     margin: 2rem auto;
-    background: var(--bg-light);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.625rem;
     font-weight: 600;
     color: var(--text-color);
+    font-size: 1rem;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
     font-size: 1rem;
     font-family: inherit;
+    transition: all 0.3s ease;
+    background: var(--bg-light);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(95, 103, 165, 0.1);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(95, 103, 165, 0.1);
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
+    line-height: 1.6;
 }
 
 .form-message {
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
     display: none;
+    font-size: 1.125rem;
+    line-height: 1.6;
 }
 
 .form-message.success {
-    background: #d1fae5;
-    color: #065f46;
-    border: 1px solid #10b981;
+    background: #10b981;
+    color: white;
+    border: 3px solid #059669;
     display: block;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
 }
 
 .form-message.error {

@@ -26,6 +26,7 @@
         <div class="hero-container">
             <div class="hero-image">
                 <img src="images/tern-hsd.jpg" alt="TERN HSD E-bike" class="hero-bike-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="out-of-stock-banner">Out of Stock</div>
                 <div class="image-placeholder bike-hero" style="display: none;">
                     <div class="placeholder-content">
                         <p>TERN HSD Image</p>
@@ -33,7 +34,6 @@
                 </div>
             </div>
             <div class="hero-content">
-                <div class="out-of-stock-banner">Out of Stock</div>
                 <h1 class="hero-title">TERN HSD</h1>
                 <p class="hero-subtitle">Compact yet powerful urban e-bike. Perfect for commuters who need a versatile, apartment-friendly e-bike.</p>
             </div>
@@ -128,8 +128,8 @@
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            // Replace with your Google Apps Script URL after setup
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxAMWcyJLM8C-vodA1Jk-dPNwJlFAszwrsr94Uk8ZcD03_uF0P-B-LDzo3Sh3sPCh4gGw/exec';
+            // Google Apps Script URL
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbz3MTLwROY8s7Q7Qjro2MVKJxYa5_LWtN31UC6gWKDojUNoBlWKheB0wwWP_zNjwqRdcg/exec';
             
             // Create a hidden iframe for form submission (works around CORS)
             const iframe = document.createElement('iframe');
@@ -161,16 +161,27 @@
                 messageDiv.className = 'form-message success';
                 messageDiv.textContent = 'Thank you! We\'ll notify you as soon as the TERN HSD is back in stock.';
                 messageDiv.style.display = 'block';
-                form.reset();
+                
+                // Hide the form
+                form.style.display = 'none';
+                
                 messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 
                 // Clean up
                 document.body.removeChild(tempForm);
                 document.body.removeChild(iframe);
-                
-                submitButton.disabled = false;
-                submitButton.textContent = 'Notify Me When Available';
             }, 500);
+        });
+
+        // Reset form when page loads (if user navigated away and came back)
+        window.addEventListener('load', function() {
+            const form = document.getElementById('hsd-form');
+            const messageDiv = document.getElementById('form-message');
+            // Reset form state on page load
+            form.style.display = 'block';
+            messageDiv.style.display = 'none';
+            messageDiv.className = 'form-message';
+            form.reset();
         });
     </script>
 </body>
