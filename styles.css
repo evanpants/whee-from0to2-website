@@ -1044,6 +1044,21 @@ a.cta-button {
     box-shadow: var(--shadow-lg);
 }
 
+.storage-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    background: var(--bg-light);
+}
+
+.storage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
 @media (max-width: 768px) {
     .lightbox-close {
         top: -40px;
