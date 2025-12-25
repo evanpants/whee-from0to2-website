@@ -111,33 +111,98 @@
         const lightboxOverlay = document.getElementById('lightbox-overlay');
         const lightboxImage = document.getElementById('lightbox-image');
         const lightboxClose = document.getElementById('lightbox-close');
-
+        
+        // Create array of all image sources and alt texts
+        const imageArray = Array.from(storageImages).map(img => ({
+            src: img.getAttribute('data-full'),
+            alt: img.getAttribute('alt')
+        }));
+        
+        let currentImageIndex = 0;
+        
+        // Swipe detection variables
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const minSwipeDistance = 50; // Minimum distance for a swipe
+        
+        // Function to open lightbox with specific image index
+        function openLightbox(index) {
+            currentImageIndex = index;
+            lightboxImage.src = imageArray[index].src;
+            lightboxImage.alt = imageArray[index].alt;
+            lightboxOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to show next image
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % imageArray.length;
+            lightboxImage.src = imageArray[currentImageIndex].src;
+            lightboxImage.alt = imageArray[currentImageIndex].alt;
+        }
+        
+        // Function to show previous image
+        function showPreviousImage() {
+            currentImageIndex = (currentImageIndex - 1 + imageArray.length) % imageArray.length;
+            lightboxImage.src = imageArray[currentImageIndex].src;
+            lightboxImage.alt = imageArray[currentImageIndex].alt;
+        }
+        
         // Open lightbox when image is clicked
-        storageImages.forEach(img => {
+        storageImages.forEach((img, index) => {
             img.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const fullImageSrc = this.getAttribute('data-full');
-                const altText = this.getAttribute('alt');
-                lightboxImage.src = fullImageSrc;
-                lightboxImage.alt = altText;
-                lightboxOverlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                openLightbox(index);
             });
         });
 
         // Also allow clicking on the card to open lightbox
-        document.querySelectorAll('.storage-image-card').forEach(card => {
+        document.querySelectorAll('.storage-image-card').forEach((card, index) => {
             card.addEventListener('click', function(e) {
                 const img = this.querySelector('.storage-image');
                 if (img) {
-                    const fullImageSrc = img.getAttribute('data-full');
-                    const altText = img.getAttribute('alt');
-                    lightboxImage.src = fullImageSrc;
-                    lightboxImage.alt = altText;
-                    lightboxOverlay.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
+                    openLightbox(index);
                 }
             });
+        });
+        
+        // Touch events for swipe detection (mobile)
+        lightboxOverlay.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        lightboxOverlay.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const swipeDistance = touchStartX - touchEndX;
+            
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) {
+                    // Swipe left - next image
+                    showNextImage();
+                } else {
+                    // Swipe right - previous image
+                    showPreviousImage();
+                }
+            }
+        }
+        
+        // Keyboard navigation (desktop)
+        document.addEventListener('keydown', function(e) {
+            if (lightboxOverlay.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    showPreviousImage();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    showNextImage();
+                }
+            }
         });
 
         // Close lightbox when X is clicked
@@ -149,13 +214,6 @@
         // Close lightbox when clicking outside the image
         lightboxOverlay.addEventListener('click', function(e) {
             if (e.target === lightboxOverlay) {
-                closeLightbox();
-            }
-        });
-
-        // Close lightbox with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && lightboxOverlay.style.display === 'flex') {
                 closeLightbox();
             }
         });
