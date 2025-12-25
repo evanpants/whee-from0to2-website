@@ -718,6 +718,15 @@ a.cta-button {
     border-bottom: none;
 }
 
+.pricing-features li a {
+    transition: color 0.3s ease;
+}
+
+.pricing-features li a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
 /* How It Works */
 .how-it-works {
     padding: 80px 20px;
