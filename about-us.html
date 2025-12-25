@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about from0to2 - E-bike subscription service in NYC.">
+    <title>About Us | from0to2.com</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/favicon.png?v=1">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.svg" alt="from0to2 Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="logo-text" style="display: none;">from0to2</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="get-started.html" class="cta-button nav-cta">Get Started</a>
+                <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="get-started.html">Get Started</a>
+            <a href="storage-options.html">Storage Options</a>
+            <a href="about-us.html">About Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero hero-compact">
+        <div class="hero-container hero-container-compact">
+            <div class="hero-content">
+                <h1 class="hero-title hero-title-compact">About Us</h1>
+                <p class="hero-subtitle hero-subtitle-compact">Coming Soon</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section class="enjoy-section">
+        <div class="container">
+            <div class="enjoy-content">
+                <h2 class="section-title">Coming Soon</h2>
+                <p class="section-subtitle">We're working on something great. Check back soon to learn more about from0to2!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>from0to2</h4>
+                    <p><a href="about-us.html" style="color: var(--text-lighter); text-decoration: none;">About Us</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@from0to2.com</p>
+                    <p>Serving New York City</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <p><a href="#">Terms of Service</a></p>
+                    <p><a href="#">Privacy Policy</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 from0to2.com. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        hamburgerMenu.addEventListener('click', function() {
+            hamburgerMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburgerMenu.contains(e.target) && !mobileMenu.contains(e.target)) {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
