@@ -1067,7 +1067,7 @@ a.cta-button {
 
 /* Hamburger Menu */
 .hamburger-menu {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 30px;
@@ -1136,15 +1136,7 @@ a.cta-button {
     color: var(--primary-color);
 }
 
-@media (max-width: 768px) {
-    .hamburger-menu {
-        display: flex;
-    }
-    
-    .nav-cta {
-        margin-right: 0;
-    }
-}
+/* Hamburger menu is always visible */
 
 @media (max-width: 768px) {
     .lightbox-close {
