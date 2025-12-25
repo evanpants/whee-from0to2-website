@@ -876,8 +876,13 @@ a.cta-button {
 
 @media (max-width: 768px) {
     .hero {
-        padding: 60px 20px;
+        padding: 60px 15px;
         min-height: auto;
+    }
+    
+    .hero-container {
+        gap: 30px;
+        padding: 0;
     }
     
     .hero-title {
@@ -891,12 +896,20 @@ a.cta-button {
     .hero-bike-image {
         height: auto;
         max-height: 400px;
+        max-width: calc(100% - 20px);
+        width: auto;
         object-fit: contain;
-        width: 100%;
+        object-position: center;
+        display: block;
+        margin: 0 auto;
     }
     
     .hero-image {
-        padding: 0 20px;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
     
     .section-title {
@@ -930,8 +943,17 @@ a.cta-button {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding: 40px 10px;
+    }
+    
     .hero-bike-image {
         max-height: 300px;
+        max-width: calc(100% - 10px);
+    }
+    
+    .hero-image {
+        padding: 0 5px;
     }
     
     .pricing-card {
