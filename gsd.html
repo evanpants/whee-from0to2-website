@@ -71,7 +71,7 @@
                                 <img src="images/gsd-04.jpeg" alt="GSD E-bike" class="gsd-carousel-image">
                             </div>
                             <div class="gsd-carousel-slide">
-                                <img src="images/gsd-05.jpg" alt="GSD E-bike" class="gsd-carousel-image">
+                                <img src="images/gsd-05.jpg" alt="GSD E-bike" class="gsd-carousel-image gsd-image-05">
                             </div>
                         </div>
                         <button class="gsd-carousel-arrow gsd-carousel-prev" id="gsd-carousel-prev" aria-label="Previous image">
@@ -171,7 +171,7 @@
             const indicators = document.querySelectorAll('.gsd-carousel-indicator');
             
             let currentSlide = 0;
-            let autoScrollInterval;
+            let autoScrollTimeout;
             const autoScrollDelay = 4000; // 4 seconds
             
             function updateCarousel() {
@@ -193,40 +193,45 @@
             function nextSlide() {
                 currentSlide = (currentSlide + 1) % slides.length;
                 updateCarousel();
+                scheduleNextSlide();
             }
             
             function prevSlide() {
                 currentSlide = (currentSlide - 1 + slides.length) % slides.length;
                 updateCarousel();
+                scheduleNextSlide();
             }
             
-            function startAutoScroll() {
-                autoScrollInterval = setInterval(nextSlide, autoScrollDelay);
+            function scheduleNextSlide() {
+                clearTimeout(autoScrollTimeout);
+                autoScrollTimeout = setTimeout(() => {
+                    nextSlide();
+                }, autoScrollDelay);
             }
             
             function pauseAutoScroll() {
-                clearInterval(autoScrollInterval);
+                clearTimeout(autoScrollTimeout);
+            }
+            
+            function resumeAutoScroll() {
+                scheduleNextSlide();
             }
             
             // Initialize
             updateCarousel();
-            startAutoScroll();
+            scheduleNextSlide();
             
             // Pause on hover
             carousel.addEventListener('mouseenter', pauseAutoScroll);
-            carousel.addEventListener('mouseleave', startAutoScroll);
+            carousel.addEventListener('mouseleave', resumeAutoScroll);
             
             // Arrow buttons
             nextBtn.addEventListener('click', () => {
                 nextSlide();
-                pauseAutoScroll();
-                setTimeout(startAutoScroll, autoScrollDelay * 2);
             });
             
             prevBtn.addEventListener('click', () => {
                 prevSlide();
-                pauseAutoScroll();
-                setTimeout(startAutoScroll, autoScrollDelay * 2);
             });
             
             // Indicators
@@ -234,8 +239,7 @@
                 indicator.addEventListener('click', () => {
                     currentSlide = index;
                     updateCarousel();
-                    pauseAutoScroll();
-                    setTimeout(startAutoScroll, autoScrollDelay * 2);
+                    scheduleNextSlide();
                 });
             });
             
@@ -259,8 +263,9 @@
                     } else {
                         prevSlide();
                     }
+                } else {
+                    resumeAutoScroll();
                 }
-                setTimeout(startAutoScroll, autoScrollDelay * 2);
             }, { passive: true });
         })();
     </script>

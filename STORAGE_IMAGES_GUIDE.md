@@ -36,3 +36,4 @@ The page is set up with:
 Once the images are added, they will automatically display and the lightbox will work when clicked.
 
 
+
