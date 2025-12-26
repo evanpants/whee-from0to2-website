@@ -193,9 +193,10 @@ a.cta-button {
 .rotating-words {
     position: relative;
     display: inline-block;
-    min-width: 300px;
+    min-width: 400px;
     text-align: left;
     vertical-align: bottom;
+    overflow: hidden;
 }
 
 .rotating-word {
@@ -203,9 +204,9 @@ a.cta-button {
     left: 0;
     top: 0;
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    color: var(--primary-color);
+    transform: translateX(100px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #e2452f;
     font-weight: 900;
     white-space: nowrap;
     pointer-events: none;
@@ -214,8 +215,8 @@ a.cta-button {
 .rotating-word.active {
     position: relative;
     opacity: 1;
-    transform: translateY(0) scale(1);
-    color: var(--primary-color);
+    transform: translateX(0);
+    color: #e2452f;
     font-weight: 900;
     pointer-events: auto;
 }
