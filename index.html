@@ -39,7 +39,15 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">THE FASTEST WAY TO YOUR HAPPY PLACE</h1>
+                <h1 class="hero-title">
+                    THE FASTEST WAY TO 
+                    <span class="rotating-words">
+                        <span class="rotating-word active">Your happy place</span>
+                        <span class="rotating-word">school</span>
+                        <span class="rotating-word">the supermarket</span>
+                        <span class="rotating-word">Prospect Park</span>
+                    </span>
+                </h1>
                 <div class="hero-cta">
                     <a href="get-started.html" class="cta-button primary large">Get Started</a>
                 </div>
@@ -60,19 +68,19 @@
         <div class="container">
             <div class="features-grid">
                 <div class="feature-item">
-                    <h2>All-inclusive Subscriptions</h2>
-                    <p>Get a premium e-bike, full service, and peace of mind, starting at $225/mo</p>
+                    <h2>All-Inclusive Subscriptions</h2>
+                    <p>Get a premium family cargo bike, full service, and peace of mind, starting at $225/mo</p>
                 </div>
                 <div class="feature-item">
-                    <h2>Premium E-bikes, Created to Carry</h2>
-                    <p>Offering industry-leading electric bikes, designed for safety, comfort, and serious carrying power.</p>
+                    <h2>Premium Family Cargo Bikes</h2>
+                    <p>Offering industry-leading electric bikes, designed for safety, and comfort to carry kids, groceries and even another adult.</p>
                 </div>
                 <div class="feature-item">
-                    <h2>Customize With Accessories</h2>
-                    <p>Make it yours with accessories for school runs, commutes, and weekend adventures.</p>
+                    <h2>Make It Yours</h2>
+                    <p>Customize with accessories for school runs, commutes, and weekend adventures.</p>
                 </div>
                 <div class="feature-item">
-                    <h2>Subscription With Flexibility Built In</h2>
+                    <h2>Flexibility Built In</h2>
                     <p>Month-to-month with freedom to swap or purchase when you're ready.</p>
                 </div>
             </div>
@@ -142,7 +150,7 @@
     <!-- Pricing Section -->
     <section class="pricing" id="subscriptions">
         <div class="container">
-            <h2 class="section-title">All-inclusive Subscriptions</h2>
+            <h2 class="section-title">All-Inclusive Subscriptions</h2>
             <p class="section-subtitle">Get a premium e-bike, full service, and peace of mind</p>
             <div class="pricing-card">
                 <div class="pricing-header">
@@ -232,6 +240,29 @@
     </footer>
 
     <script>
+        // Rotating words carousel
+        (function() {
+            const rotatingWords = document.querySelectorAll('.rotating-word');
+            let currentIndex = 0;
+            const rotateDelay = 3000; // 3 seconds per word
+            
+            function rotateWords() {
+                // Remove active class from current word
+                rotatingWords[currentIndex].classList.remove('active');
+                
+                // Move to next word
+                currentIndex = (currentIndex + 1) % rotatingWords.length;
+                
+                // Add active class to new word
+                rotatingWords[currentIndex].classList.add('active');
+            }
+            
+            // Start rotation
+            if (rotatingWords.length > 0) {
+                setInterval(rotateWords, rotateDelay);
+            }
+        })();
+
         // Hamburger menu functionality
         const hamburgerMenu = document.getElementById('hamburger-menu');
         const mobileMenu = document.getElementById('mobile-menu');

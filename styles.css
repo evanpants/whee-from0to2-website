@@ -190,6 +190,36 @@ a.cta-button {
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.rotating-words {
+    position: relative;
+    display: inline-block;
+    min-width: 300px;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.rotating-word {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--primary-color);
+    font-weight: 900;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.rotating-word.active {
+    position: relative;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    color: var(--primary-color);
+    font-weight: 900;
+    pointer-events: auto;
+}
+
 .hero-subtitle {
     font-size: 1.25rem;
     color: var(--text-light);
