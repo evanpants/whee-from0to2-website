@@ -187,6 +187,16 @@ a.cta-button {
 }
 
 .hero-content {
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.hero-image {
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.hero-content {
     animation: fadeInUp 0.8s ease;
 }
 
@@ -204,7 +214,8 @@ a.cta-button {
 .rotating-words {
     position: relative;
     display: inline-block;
-    min-width: 400px;
+    min-width: 300px;
+    max-width: 100%;
     text-align: left;
     vertical-align: bottom;
     overflow: hidden;
@@ -218,9 +229,11 @@ a.cta-button {
     transition: opacity 0.5s ease-out;
     color: #e2452f;
     font-weight: 900;
-    white-space: nowrap;
+    white-space: normal;
+    word-wrap: break-word;
     pointer-events: none;
     transform: none;
+    max-width: 100%;
 }
 
 .rotating-word.active {
@@ -231,6 +244,8 @@ a.cta-button {
     pointer-events: auto;
     transition: opacity 0.2s ease-in;
     transform: none;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 .hero-subtitle {
