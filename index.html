@@ -71,21 +71,6 @@
                                 <img src="images/hero-bike3.png" alt="Family riding family cargo bike in NYC" class="hero-carousel-image">
                             </div>
                         </div>
-                        <button class="hero-carousel-arrow hero-carousel-prev" id="hero-carousel-prev" aria-label="Previous image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M15 18l-6-6 6-6"/>
-                            </svg>
-                        </button>
-                        <button class="hero-carousel-arrow hero-carousel-next" id="hero-carousel-next" aria-label="Next image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 18l6-6-6-6"/>
-                            </svg>
-                        </button>
-                        <div class="hero-carousel-indicators" id="hero-carousel-indicators">
-                            <button class="hero-carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
-                            <button class="hero-carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
-                            <button class="hero-carousel-indicator" data-slide="2" aria-label="Go to slide 3"></button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -276,7 +261,7 @@
             
             let currentSlide = 0;
             let autoScrollTimeout;
-            const autoScrollDelay = 5000; // 5 seconds
+            const autoScrollDelay = 10000; // 10 seconds
             
             function updateCarousel() {
                 slides.forEach((slide, index) => {
@@ -286,12 +271,6 @@
                     }
                 });
                 
-                indicators.forEach((indicator, index) => {
-                    indicator.classList.remove('active');
-                    if (index === currentSlide) {
-                        indicator.classList.add('active');
-                    }
-                });
             }
             
             function nextSlide() {
@@ -328,24 +307,6 @@
             // Pause on hover
             carousel.addEventListener('mouseenter', pauseAutoScroll);
             carousel.addEventListener('mouseleave', resumeAutoScroll);
-            
-            // Arrow buttons
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-            });
-            
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-            });
-            
-            // Indicators
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    currentSlide = index;
-                    updateCarousel();
-                    scheduleNextSlide();
-                });
-            });
             
             // Swipe support
             let touchStartX = 0;
