@@ -164,8 +164,8 @@ a.cta-button {
 .nav-right .cta-button.nav-cta,
 a.cta-button.nav-cta,
 .cta-button.nav-cta {
-    background-color: #687232 !important;
-    background: #687232 !important;
+    background-color: #5e67a5 !important;
+    background: #5e67a5 !important;
     color: #ffffff !important;
     border: none !important;
     border-color: transparent !important;
@@ -177,8 +177,8 @@ a.cta-button.nav-cta,
 .nav-right .cta-button.nav-cta:hover,
 a.cta-button.nav-cta:hover,
 .cta-button.nav-cta:hover {
-    background-color: #556028 !important;
-    background: #556028 !important;
+    background-color: var(--primary-light) !important;
+    background: var(--primary-light) !important;
     color: #ffffff !important;
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
@@ -190,8 +190,8 @@ a.cta-button.nav-cta:hover,
 .nav-right .cta-button.nav-cta:active,
 a.cta-button.nav-cta:active,
 .cta-button.nav-cta:active {
-    background-color: #687232 !important;
-    background: #687232 !important;
+    background-color: #5e67a5 !important;
+    background: #5e67a5 !important;
     color: #ffffff !important;
     transform: translateY(0);
 }
@@ -202,10 +202,10 @@ a.cta-button.nav-cta:active,
 .nav-right .cta-button.nav-cta:focus,
 a.cta-button.nav-cta:focus,
 .cta-button.nav-cta:focus {
-    background-color: #687232 !important;
-    background: #687232 !important;
+    background-color: #5e67a5 !important;
+    background: #5e67a5 !important;
     color: #ffffff !important;
-    outline: 2px solid #687232;
+    outline: 2px solid #5e67a5;
     outline-offset: 2px;
 }
 
@@ -215,8 +215,8 @@ a.cta-button.nav-cta:focus,
 .nav-right .cta-button.nav-cta:visited,
 a.cta-button.nav-cta:visited,
 .cta-button.nav-cta:visited {
-    background-color: #687232 !important;
-    background: #687232 !important;
+    background-color: #5e67a5 !important;
+    background: #5e67a5 !important;
     color: #ffffff !important;
 }
 
@@ -270,6 +270,8 @@ a.cta-button.nav-cta:visited,
     text-align: left;
     vertical-align: bottom;
     overflow: visible;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .rotating-word {
