@@ -188,12 +188,11 @@ a.cta-button {
 
 .hero-content {
     min-width: 0;
-    flex-shrink: 0;
 }
 
 .hero-image {
     min-width: 0;
-    flex-shrink: 0;
+    width: 100%;
 }
 
 .hero-content {
@@ -214,11 +213,11 @@ a.cta-button {
 .rotating-words {
     position: relative;
     display: inline-block;
-    min-width: 300px;
+    min-width: 200px;
     max-width: 100%;
     text-align: left;
     vertical-align: bottom;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .rotating-word {
