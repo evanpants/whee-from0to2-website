@@ -202,8 +202,8 @@ a.cta-button.nav-cta:active,
 .nav-right .cta-button.nav-cta:focus,
 a.cta-button.nav-cta:focus,
 .cta-button.nav-cta:focus {
-    background-color: #5F67A5 !important;
-    background: #5F67A5 !important;
+    background-color: var(--primary-color) !important;
+    background: var(--primary-color) !important;
     color: #ffffff !important;
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
@@ -1332,6 +1332,11 @@ a.cta-button.nav-cta:visited,
     cursor: pointer;
     padding: 0;
     z-index: 1001;
+    transition: transform 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    transform: translateY(-2px);
 }
 
 .hamburger-menu span {
