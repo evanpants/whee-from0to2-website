@@ -164,8 +164,8 @@ a.cta-button {
 .nav-right .cta-button.nav-cta,
 a.cta-button.nav-cta,
 .cta-button.nav-cta {
-    background-color: #5F67A5 !important;
-    background: #5F67A5 !important;
+    background-color: var(--primary-color) !important;
+    background: var(--primary-color) !important;
     color: #ffffff !important;
     border: none !important;
     border-color: transparent !important;
@@ -190,8 +190,8 @@ a.cta-button.nav-cta:hover,
 .nav-right .cta-button.nav-cta:active,
 a.cta-button.nav-cta:active,
 .cta-button.nav-cta:active {
-    background-color: #5F67A5 !important;
-    background: #5F67A5 !important;
+    background-color: var(--primary-color) !important;
+    background: var(--primary-color) !important;
     color: #ffffff !important;
     transform: translateY(0);
 }
@@ -215,8 +215,8 @@ a.cta-button.nav-cta:focus,
 .nav-right .cta-button.nav-cta:visited,
 a.cta-button.nav-cta:visited,
 .cta-button.nav-cta:visited {
-    background-color: #5F67A5 !important;
-    background: #5F67A5 !important;
+    background-color: var(--primary-color) !important;
+    background: var(--primary-color) !important;
     color: #ffffff !important;
 }
 
