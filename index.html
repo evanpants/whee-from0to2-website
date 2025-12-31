@@ -43,7 +43,7 @@
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    THE FASTEST WAY TO 
+                    <span class="hero-title-static">THE FASTEST WAY TO</span>
                     <span class="rotating-words">
                         <span class="rotating-word-measure" aria-hidden="true"></span>
                         <span class="rotating-word active">Your happy place</span>
@@ -338,70 +338,77 @@
             }, { passive: true });
         })();
 
-        // Rotating words carousel - rebuilt for stability
+        // Rotating words carousel - completely rebuilt
         (function() {
             const rotatingWords = document.querySelectorAll('.rotating-word');
             const rotatingWordsContainer = document.querySelector('.rotating-words');
             const measureElement = document.querySelector('.rotating-word-measure');
-            let currentIndex = 0;
-            const rotateDelay = 3000; // 3 seconds per word
-            const fadeOutDuration = 400; // Match CSS transition duration
-            const gapDuration = 300; // 0.3s gap between fade out and fade in
+            const staticText = document.querySelector('.hero-title-static');
+            const heroTitle = document.querySelector('.hero-title');
             
-            if (!rotatingWordsContainer || !measureElement || rotatingWords.length === 0) {
+            let currentIndex = 0;
+            const rotateDelay = 3000;
+            const fadeOutDuration = 400;
+            const gapDuration = 300;
+            
+            if (!rotatingWordsContainer || !measureElement || !staticText || rotatingWords.length === 0) {
                 return;
             }
             
-            // Update measure element to maintain layout space
+            // Set container width to match static text width
+            function setContainerWidth() {
+                if (!staticText || !rotatingWordsContainer) return;
+                const staticWidth = staticText.offsetWidth;
+                if (staticWidth > 0) {
+                    rotatingWordsContainer.style.width = staticWidth + 'px';
+                    measureElement.style.width = staticWidth + 'px';
+                }
+            }
+            
+            // Update measure element and container dimensions
             function updateMeasureElement(wordElement) {
                 if (!wordElement || !measureElement || !rotatingWordsContainer) return;
                 
-                // Set the text content
+                // Set text content
                 measureElement.textContent = wordElement.textContent;
                 
-                // Force a reflow to ensure accurate measurements
+                // Force reflow
                 void measureElement.offsetHeight;
                 
-                // Sync the word element's width to match measurement element
-                // This ensures proper line breaks match
-                const measureWidth = measureElement.offsetWidth;
+                // Get dimensions
                 const measureHeight = measureElement.offsetHeight;
                 
-                // Set min-width instead of fixed width to allow natural wrapping
-                // but prevent breaking within words
-                if (measureWidth > 0) {
-                    wordElement.style.minWidth = measureWidth + 'px';
-                    wordElement.style.width = 'auto';
+                // Update container height
+                if (measureHeight > 0) {
+                    rotatingWordsContainer.style.minHeight = measureHeight + 'px';
                 }
                 
-                // Update container height to prevent overlap with button
-                // Add a small buffer for multi-line text
-                if (measureHeight > 0) {
-                    const buffer = measureHeight > 50 ? 8 : 4; // Extra buffer for multi-line
-                    rotatingWordsContainer.style.minHeight = (measureHeight + buffer) + 'px';
+                // Sync word element width
+                const containerWidth = rotatingWordsContainer.offsetWidth;
+                if (containerWidth > 0) {
+                    wordElement.style.width = containerWidth + 'px';
                 }
             }
             
             function rotateWords() {
                 const currentWord = rotatingWords[currentIndex];
                 
-                // Update measure element before transition to lock layout
+                // Lock dimensions before transition
                 updateMeasureElement(currentWord);
                 
-                // Remove active class to start fade out
+                // Fade out current word
                 currentWord.classList.remove('active');
                 
                 // Move to next word
                 currentIndex = (currentIndex + 1) % rotatingWords.length;
                 const nextWord = rotatingWords[currentIndex];
                 
-                // Update measure element with next word content
+                // Update measure for next word
                 updateMeasureElement(nextWord);
                 
-                // Add active class after fade out + gap
+                // Fade in next word
                 setTimeout(function() {
                     nextWord.classList.add('active');
-                    // Re-measure after word becomes active to ensure accurate height
                     setTimeout(function() {
                         updateMeasureElement(nextWord);
                     }, 50);
@@ -409,25 +416,27 @@
             }
             
             // Initialize
-            const initialWord = rotatingWords[currentIndex];
-            if (initialWord) {
-                // Set initial word as active
-                initialWord.classList.add('active');
-                // Update measurements after a brief delay to ensure proper rendering
-                setTimeout(function() {
-                    updateMeasureElement(initialWord);
-                    // Double-check after another brief delay for multi-line text
+            function initialize() {
+                setContainerWidth();
+                
+                const initialWord = rotatingWords[currentIndex];
+                if (initialWord) {
+                    initialWord.classList.add('active');
                     setTimeout(function() {
                         updateMeasureElement(initialWord);
-                    }, 50);
-                }, 100);
+                        setTimeout(function() {
+                            updateMeasureElement(initialWord);
+                        }, 50);
+                    }, 100);
+                }
             }
             
-            // Handle window resize
+            // Handle resize
             let resizeTimeout;
             window.addEventListener('resize', function() {
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(function() {
+                    setContainerWidth();
                     const activeWord = rotatingWordsContainer.querySelector('.rotating-word.active');
                     if (activeWord) {
                         updateMeasureElement(activeWord);
@@ -435,7 +444,8 @@
                 }, 100);
             });
             
-            // Start rotation
+            // Start
+            initialize();
             setInterval(rotateWords, rotateDelay);
         })();
 

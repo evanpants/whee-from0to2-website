@@ -314,15 +314,21 @@ a.cta-button.nav-cta:visited,
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     word-wrap: break-word;
     overflow-wrap: break-word;
+    display: block;
+}
+
+.hero-title-static {
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .rotating-words {
     position: relative;
     display: inline-block;
     vertical-align: baseline;
-    max-width: 100%;
-    min-height: 1.2em; /* Ensure minimum height to prevent collapse */
-    margin-bottom: 0.2em; /* Add small margin to prevent overlap with button */
+    margin-left: 0.3em;
+    min-height: 1.2em;
+    margin-bottom: 0.2em;
 }
 
 .rotating-word-measure {
@@ -334,10 +340,8 @@ a.cta-button.nav-cta:visited,
     word-break: normal;
     overflow-wrap: normal;
     height: auto;
-    min-height: 0;
     overflow: visible;
     pointer-events: none;
-    max-width: 100%;
     line-height: inherit;
     position: relative;
     z-index: 0;
@@ -357,10 +361,8 @@ a.cta-button.nav-cta:visited,
     overflow-wrap: normal;
     pointer-events: none;
     z-index: 1;
-    max-width: 100%;
     line-height: inherit;
     height: auto;
-    min-width: fit-content;
 }
 
 .rotating-word.active {
