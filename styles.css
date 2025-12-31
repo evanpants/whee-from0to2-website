@@ -320,13 +320,24 @@ a.cta-button.nav-cta:visited,
     position: relative;
     display: inline-block;
     min-width: 200px;
-    min-height: 2.4em;
     max-width: 100%;
     text-align: left;
     vertical-align: bottom;
     overflow: visible;
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+.rotating-word-placeholder {
+    visibility: hidden;
+    display: inline-block;
+    color: #e2452f;
+    font-weight: 900;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    height: auto;
+    line-height: 1.2;
 }
 
 .rotating-word {
