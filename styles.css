@@ -318,9 +318,9 @@ a.cta-button.nav-cta:visited,
 
 .rotating-words {
     position: relative;
-    display: inline-block;
+    display: inline;
     text-align: left;
-    vertical-align: bottom;
+    vertical-align: baseline;
     overflow: visible;
 }
 
