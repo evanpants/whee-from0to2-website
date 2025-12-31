@@ -333,7 +333,8 @@ a.cta-button.nav-cta:visited,
     left: 0;
     top: 0;
     opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in-out, visibility 0s linear 0.4s;
     color: #e2452f;
     font-weight: 900;
     white-space: normal;
@@ -341,18 +342,21 @@ a.cta-button.nav-cta:visited,
     pointer-events: none;
     transform: none;
     max-width: 100%;
+    z-index: 1;
 }
 
 .rotating-word.active {
     position: relative;
     opacity: 1;
+    visibility: visible;
     color: #e2452f;
     font-weight: 900;
     pointer-events: auto;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out, visibility 0s linear 0s;
     transform: none;
     white-space: normal;
     word-wrap: break-word;
+    z-index: 2;
 }
 
 .hero-subtitle {
