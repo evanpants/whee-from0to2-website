@@ -318,10 +318,12 @@ a.cta-button.nav-cta:visited,
 
 .rotating-words {
     position: relative;
-    display: inline;
+    display: inline-block;
     text-align: left;
     vertical-align: baseline;
     overflow: visible;
+    width: auto;
+    min-width: 0;
 }
 
 .rotating-word {
