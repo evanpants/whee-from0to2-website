@@ -1195,6 +1195,16 @@ a.cta-button.nav-cta:visited,
         padding: 0.4rem 0.8rem;
     }
     
+    .team-profiles {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    
+    .profile-image {
+        width: 180px !important;
+        height: 180px !important;
+    }
+    
     .hero {
         padding: 60px 15px;
         min-height: auto;
