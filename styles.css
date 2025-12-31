@@ -324,6 +324,7 @@ a.cta-button.nav-cta:visited,
     overflow: visible;
     width: auto;
     min-width: 0;
+    max-width: 100%;
 }
 
 .rotating-word {
@@ -358,7 +359,7 @@ a.cta-button.nav-cta:visited,
     z-index: 2;
     display: inline;
     width: auto;
-    max-width: none;
+    max-width: 100%;
 }
 
 .hero-subtitle {
