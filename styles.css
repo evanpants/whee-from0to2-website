@@ -943,9 +943,9 @@ a.cta-button.nav-cta:visited,
 }
 
 .form-message.success {
-    background: #10b981;
+    background: #4A90A4;
     color: white;
-    border: 3px solid #059669;
+    border: 3px solid #3a7383;
     display: block;
     font-weight: 600;
     text-align: center;
