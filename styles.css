@@ -1,4 +1,27 @@
-/* Modern Cargo Bike Leasing Website - from0to2.com */
+
+
+/* ============================================================
+   Sign Up button — red variant (matches Get Started style)
+   ============================================================ */
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup {
+    background-color: #E63C25 !important;
+    background: #E63C25 !important;
+    color: #ffffff !important;
+}
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:hover {
+    background-color: #c0321d !important;
+    background: #c0321d !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:active,
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:focus,
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:visited {
+    background-color: #E63C25 !important;
+    background: #E63C25 !important;
+    color: #ffffff !important;
+}/* Modern Cargo Bike Leasing Website - from0to2.com */
 
 * {
     margin: 0;
@@ -1772,5 +1795,28 @@ body .navbar .nav-container .nav-right a.cta-button.nav-cta:focus,
 body .navbar .nav-container .nav-right a.cta-button.nav-cta:visited {
     background-color: #5F67A5 !important;
     background: #5F67A5 !important;
+    color: #ffffff !important;
+}
+
+/* ============================================================
+   Sign Up button — red variant, matches Get Started style
+   ============================================================ */
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup {
+    background-color: #E63C25 !important;
+    background: #E63C25 !important;
+    color: #ffffff !important;
+}
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:hover {
+    background-color: #c0321d !important;
+    background: #c0321d !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:active,
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:focus,
+body .navbar .nav-container .nav-right a.cta-button.nav-cta-signup:visited {
+    background-color: #E63C25 !important;
+    background: #E63C25 !important;
     color: #ffffff !important;
 }
